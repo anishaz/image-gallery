@@ -1,15 +1,17 @@
 package main
 
 import (
-    "fmt"
+    "encoding/json"
+    "log"
     "net/http"
+    "github.com/gorilla/mux"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Image Gallery", r.URL.Path[1:])
-}
-
 func main() {
-    http.HandleFunc("/", handler)
-    http.ListenAndServe(":8080", nil)
+    router := mux.NewRouter()
+    router.HandleFunc("/user", GetUsers).Methods("GET")
+    router.HandleFunc("/user/{id}", GetUser).Methods("GET")
+    router.HandleFunc("/user/{id}", CreateUser).Methods("POST")
+    router.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
+    log.Fatal(http.ListenAndServe(":8080", router))
 }
