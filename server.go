@@ -38,10 +38,18 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {}
-func GetUser(w http.ResponseWriter, r *http.Request) {}
+
+func GetUser(w http.ResponseWriter, r *http.Request) {
+  vars := mux.Vars(r)
+  key := vars["id"]
+
+  fmt.Fprintf(w, "Key: " + key)
+}
+
 func DeleteUser(w http.ResponseWriter, r *http.Request) {}
 
 type User struct {
+  ID int `json:"id"`
   FirstName string `json:"FirstName"`
   LastName string `json:"LastName"`
   Email string `json:"Email"`
