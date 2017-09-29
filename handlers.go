@@ -4,7 +4,7 @@ import (
     "encoding/json"
     "fmt"
     "net/http"
-    
+
     "github.com/gorilla/mux"
 )
 
@@ -20,7 +20,11 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
   }
   fmt.Println("Endpoint Hit: GetUsers")
 
-  json.NewEncoder(w).Encode(users)
+  w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+  w.WriteHeader(http.StatusOK)
+  if err := json.NewEncoder(w).Encode(users); err != nil {
+    panic(err)
+  }
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {}
