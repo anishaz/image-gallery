@@ -2,10 +2,10 @@ package main
 
 import (
     "encoding/json"
-    "log"
-    "net/http"
-    "github.com/gorilla/mux"
     "fmt"
+    "net/http"
+    
+    "github.com/gorilla/mux"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request){
